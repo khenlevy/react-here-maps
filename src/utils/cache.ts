@@ -120,7 +120,7 @@ export function onAllLoad(callback: AllCallback) {
  * @param url {string} - The URL/location of the script to be retrieved.
  */
 export function getScript(url: string, name: string): ScriptState {
-  if (!loadedScripts.has(name) && !document.querySelector(`script[src="${url}"]`)) {
+  if (!loadedScripts.has(name)) {
     const tag: HTMLScriptElement = document.createElement("script");
 
     const promise = new Promise<ScriptState>((resolve, reject) => {
@@ -150,7 +150,7 @@ export function getScript(url: string, name: string): ScriptState {
       tag.addEventListener("load", handleResult);
       tag.addEventListener("error", handleResult);
 
-      assignIn(tag, {src: url});
+      assignIn(tag, { src: url });
 
       body.appendChild(tag);
     });
